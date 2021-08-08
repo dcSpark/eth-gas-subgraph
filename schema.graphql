@@ -18,12 +18,15 @@ type Block @entity {
 }
 
 type Transaction @entity {
-  " Transaction hash "
   id: ID!
-
-  # TODO: from: Bytes!
-
-  # TODO: to: Bytes!
+  blockHash: Bytes!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  hash: Bytes!
+  index: BigInt!
+  from: Bytes!
+  to: Bytes
+  value: BigInt!
 
   " The total amount of gas used for the transaction [gwei] "
   gasUsed: BigInt!
@@ -31,6 +34,9 @@ type Transaction @entity {
   " The price of one unit of gas used in the transaction [gwei] "
   gasPrice: BigInt!
 
+  input: Bytes!
+  events: [Event!]! @derivedFrom(field: "transaction")
+
   " The total cost of the transaction "
-  transactionFee: BigInt!
+  # transactionFee: BigInt!
 }
